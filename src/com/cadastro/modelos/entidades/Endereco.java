@@ -1,13 +1,21 @@
 package com.cadastro.modelos.entidades;
 
 public class Endereco {
+    private String rua;
     private int numero;
     private String cidade;
-    private String rua;
 
-    public Endereco(int numero, String cidade, String rua) {
+    public Endereco(String rua, int numero, String cidade) {
+        this.rua = rua;
         this.numero = numero;
         this.cidade = cidade;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
         this.rua = rua;
     }
 
@@ -25,13 +33,5 @@ public class Endereco {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
-    }
-
-    public String getRua() {
-        return rua;
-    }
-
-    public void setRua(String rua) {
-        this.rua = rua;
     }
 }

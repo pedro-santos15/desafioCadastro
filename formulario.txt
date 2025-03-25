@@ -1,0 +1,9 @@
+1 - Qual o nome e sobrenome do pet?
+2 - Qual o tipo do pet (Cachorro/Gato)?
+3 - Qual o sexo do animal?
+4.1 - Endereço - Rua:
+4.2 - Endereço - Numero:
+4.3 - Endereço - Cidade:
+5 - Qual a idade aproximada do pet?
+6 - Qual o peso aproximado do pet?
+7 - Qual a raça do pet?

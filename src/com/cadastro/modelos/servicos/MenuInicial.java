@@ -1,9 +1,11 @@
 package com.cadastro.modelos.servicos;
-
+import com.cadastro.modelos.entidades.Pet;
+import java.io.*;
 import java.util.Scanner;
 
 public class MenuInicial {
     private int escolha;
+    private Pet pet = new Pet();
 
     public int getEscolha() {
         return escolha;
@@ -21,9 +23,10 @@ public class MenuInicial {
         this.escolha = sc.nextInt();
 
     }
-    public void escolhaMenu(){
+    public void escolhaMenu(File file){
         switch (getEscolha()){
             case 1:
+                pet.adicionarPet(file);
                 break;
             case 2:
                 break;
@@ -38,11 +41,9 @@ public class MenuInicial {
             default:
                 System.out.println("Opção inválida, atentar-se ao menu!");
                 exibirMenu();
-                escolhaMenu();
+                escolhaMenu(file);
         }
     }
-
-
 
 }
 
