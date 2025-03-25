@@ -6,23 +6,15 @@ public class Nome {
     private String nomeCompleto;
     private String nome;
     private String sobrenome;
-    private String [] separador;
 
     public Nome(String nomeCompleto) {
         try {
-            this.nomeCompleto = nomeCompleto;
-            if (nomeCompleto.contains(" ")){
-                separador = nomeCompleto.split(" ");
-                this.nome = separador[0];
-                this.sobrenome = separador[1];
-            } else {
-                throw new AusenciaNomeSobrenome("Deve-se ser informado um nome e um sobrenome");
+            if (validacaoNome(nomeCompleto)){
+                this.nomeCompleto = nomeCompleto;
             }
-
-        } catch (AusenciaNomeSobrenome e){
+        }catch (AusenciaNomeSobrenome e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     public String getNomeCompleto() {
@@ -50,7 +42,13 @@ public class Nome {
     }
 
     public boolean validacaoNome(String nomeCompleto){
-
+            if (nomeCompleto.contains(" ")){
+                String[] separador = nomeCompleto.split(" ");
+                this.nome = separador[0];
+                this.sobrenome = separador[1];
+            } else {
+                throw  new AusenciaNomeSobrenome("É necessário que seja informado um nome e sobrenome");
+            }
         return nomeCompleto.matches("[a-zA-Z]");
     }
 }

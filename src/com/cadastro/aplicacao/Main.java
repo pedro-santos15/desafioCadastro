@@ -15,7 +15,7 @@ public class Main {
         ManipulacaoArquivos arquivos = new ManipulacaoArquivos();
 
         // PASSO 1
-        File file = new File("C:\\Pechak\\MeusProjetos\\desafioCadastro\\formulario.txt");
+        File file = new File("C:\\Users\\pedrohsilva\\Projetos\\desafioCadastro\\formulario.txt");
         arquivos.leitorArquivo(file);
 
         //PASSO 2
@@ -25,7 +25,6 @@ public class Main {
 
         //PASSO 3
         System.out.println(Pet.getPets());
-
 
     }
 }

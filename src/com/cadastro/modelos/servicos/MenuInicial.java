@@ -1,11 +1,16 @@
 package com.cadastro.modelos.servicos;
+import com.cadastro.excecoes.AusenciaNomeSobrenome;
+import com.cadastro.modelos.entidades.Endereco;
+import com.cadastro.modelos.entidades.Nome;
 import com.cadastro.modelos.entidades.Pet;
+import com.cadastro.modelos.enums.Sexo;
+import com.cadastro.modelos.enums.Tipo;
+
 import java.io.*;
 import java.util.Scanner;
 
 public class MenuInicial {
     private int escolha;
-    private Pet pet = new Pet();
 
     public int getEscolha() {
         return escolha;
@@ -26,7 +31,7 @@ public class MenuInicial {
     public void escolhaMenu(File file){
         switch (getEscolha()){
             case 1:
-                pet.adicionarPet(file);
+                cadastroPet(file);
                 break;
             case 2:
                 break;
@@ -42,6 +47,61 @@ public class MenuInicial {
                 System.out.println("Opção inválida, atentar-se ao menu!");
                 exibirMenu();
                 escolhaMenu(file);
+        }
+    }
+
+    public void cadastroPet(File file){
+        FileReader fr = null;
+        try {
+            fr = new FileReader(file);
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo não foi encontrado");
+        }
+        BufferedReader br = new BufferedReader(fr);
+        String s = null;
+
+        try {
+            Scanner sc = new Scanner(System.in);
+            String[] respostas = new String[9];
+
+            for (int i = 0; ((s = br.readLine()) != null); i++) {
+                System.out.println(s);
+                respostas[i] = sc.nextLine();
+            }
+
+
+            Nome nome = null;
+            if (respostas[0].contains(" ")){
+                nome = new Nome(respostas[0]);
+            } else {
+                throw new AusenciaNomeSobrenome("É necessário que o nome possua nome e sobrenome");
+            }
+
+            Tipo tipo;
+            if (respostas[1].equalsIgnoreCase("Cachorro")){
+                tipo = Tipo.CACHORRO;
+            } else {
+                tipo = Tipo.GATO;
+            }
+
+            Sexo sexo;
+            if (respostas[2].equalsIgnoreCase("Macho")){
+                sexo = Sexo.MACHO;
+            } else {
+                sexo = Sexo.FEMEA;
+            }
+
+            Endereco endereco = new Endereco(respostas[3], Integer.parseInt(respostas[4]), respostas[5]);
+            int idade = Integer.parseInt(respostas[6]);
+            int peso = Integer.parseInt(respostas[7]);
+            String raca = respostas[8];
+
+            br.close();
+            sc.close();
+
+            Pet pet = new Pet(nome, tipo, sexo, endereco, idade, peso, raca);
+        } catch (IOException | AusenciaNomeSobrenome e) {
+            System.out.println(e.getMessage());
         }
     }
 
