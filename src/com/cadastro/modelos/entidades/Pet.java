@@ -14,8 +14,8 @@ public class Pet {
     private Tipo tipo;
     private Sexo sexo;
     private Endereco endereco;
-    private double idade;
-    private double peso;
+    private String idade;
+    private String peso;
     private String raca;
 
     private static List<Pet> pets = new ArrayList<>();
@@ -23,7 +23,7 @@ public class Pet {
     public Pet() {
     }
 
-    public Pet(Nome nome, Tipo tipo, Sexo sexo, Endereco endereco, double idade, double peso, String raca) {
+    public Pet(Nome nome, Tipo tipo, Sexo sexo, Endereco endereco, String idade, String peso, String raca) {
         this.nome = nome;
         this.tipo = tipo;
         this.sexo = sexo;
@@ -66,19 +66,19 @@ public class Pet {
         this.endereco = endereco;
     }
 
-    public double getIdade() {
+    public String getIdade() {
         return idade;
     }
 
-    public void setIdade(double idade) {
+    public void setIdade(String idade) {
         this.idade = idade;
     }
 
-    public double getPeso() {
+    public String getPeso() {
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(String peso) {
         this.peso = peso;
     }
 

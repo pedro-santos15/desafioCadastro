@@ -2,10 +2,10 @@ package com.cadastro.modelos.entidades;
 
 public class Endereco {
     private String rua;
-    private int numero;
+    private String numero;
     private String cidade;
 
-    public Endereco(String rua, int numero, String cidade) {
+    public Endereco(String rua, String numero, String cidade) {
         this.rua = rua;
         this.numero = numero;
         this.cidade = cidade;
@@ -19,11 +19,11 @@ public class Endereco {
         this.rua = rua;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -33,5 +33,10 @@ public class Endereco {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    @Override
+    public String toString() {
+        return "Rua: " + this.rua + ", " + this.numero + " - " + this.cidade;
     }
 }

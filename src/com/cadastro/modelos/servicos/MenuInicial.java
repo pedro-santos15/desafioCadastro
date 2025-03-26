@@ -1,5 +1,7 @@
 package com.cadastro.modelos.servicos;
 import com.cadastro.excecoes.AusenciaNomeSobrenome;
+import com.cadastro.excecoes.IdadeExcecao;
+import com.cadastro.excecoes.PesoExcecao;
 import com.cadastro.modelos.entidades.Endereco;
 import com.cadastro.modelos.entidades.Nome;
 import com.cadastro.modelos.entidades.Pet;
@@ -16,7 +18,7 @@ public class MenuInicial {
         return escolha;
     }
 
-    public void exibirMenu(){
+    public void exibirMenu() {
         Scanner sc = new Scanner(System.in);
         System.out.println("1. Cadastrar um novo pet");
         System.out.println("2. Alterar os dados do pet cadastrado");
@@ -28,8 +30,9 @@ public class MenuInicial {
         this.escolha = sc.nextInt();
 
     }
-    public void escolhaMenu(File file){
-        switch (getEscolha()){
+
+    public void escolhaMenu(File file) {
+        switch (getEscolha()) {
             case 1:
                 cadastroPet(file);
                 break;
@@ -50,7 +53,7 @@ public class MenuInicial {
         }
     }
 
-    public void cadastroPet(File file){
+    public void cadastroPet(File file) {
         FileReader fr = null;
         try {
             fr = new FileReader(file);
@@ -70,42 +73,74 @@ public class MenuInicial {
             }
 
 
-            Nome nome = null;
-            if (respostas[0].contains(" ")){
+            final Nome nome;
+            if (respostas[0].isEmpty()) {
+                nome = new Nome("Não informado");
+            } else if (respostas[0].contains(" ")) {
                 nome = new Nome(respostas[0]);
             } else {
-                throw new AusenciaNomeSobrenome("É necessário que o nome possua nome e sobrenome");
+                throw new AusenciaNomeSobrenome("O nome deve possuir somente letras e deve constar Nome e Sobrenome");
             }
 
+
             Tipo tipo;
-            if (respostas[1].equalsIgnoreCase("Cachorro")){
+            if (respostas[1].equalsIgnoreCase("Cachorro")) {
                 tipo = Tipo.CACHORRO;
             } else {
                 tipo = Tipo.GATO;
             }
 
             Sexo sexo;
-            if (respostas[2].equalsIgnoreCase("Macho")){
+            if (respostas[2].equalsIgnoreCase("Macho")) {
                 sexo = Sexo.MACHO;
             } else {
                 sexo = Sexo.FEMEA;
             }
 
-            Endereco endereco = new Endereco(respostas[3], Integer.parseInt(respostas[4]), respostas[5]);
-            int idade = Integer.parseInt(respostas[6]);
-            int peso = Integer.parseInt(respostas[7]);
-            String raca = respostas[8];
 
+            final Endereco endereco;
+            if (respostas[4].isEmpty()){
+                endereco = new Endereco(respostas[3], "Não informado", respostas[5]);
+            } else {
+                endereco = new Endereco(respostas[3], respostas[4],respostas[5]);
+            }
+
+            final String idade;
+            if (respostas[6].isEmpty()){
+                idade = "Não informado";
+            } else if (respostas[6].matches("[0-9]") && Double.parseDouble(respostas[6]) <= 20) {
+                idade = respostas[6];
+            } else {
+                throw new IdadeExcecao("Deve se ser informados apenas números e até no maximo 20 anos");
+            }
+
+            final String peso;
+            if (respostas[7].isEmpty()){
+                peso = "Não informado";
+            } else if (respostas[7].matches("[0-9]") &&
+            Double.parseDouble(respostas[7]) <= 60 && Double.parseDouble(respostas[7]) >= 0.5) {
+                peso = respostas[7];
+            } else {
+                throw new PesoExcecao("Deve se ser informados apenas números e no mínimo 0.5 kg e máximo de 60 kg");
+            }
+
+            final String raca;
+            if (respostas[8].isEmpty()){
+                raca = "Não informado";
+            } else {
+                raca = respostas[8];
+            }
             br.close();
             sc.close();
 
             Pet pet = new Pet(nome, tipo, sexo, endereco, idade, peso, raca);
-        } catch (IOException | AusenciaNomeSobrenome e) {
+        } catch (IOException | AusenciaNomeSobrenome | IdadeExcecao | PesoExcecao e) {
             System.out.println(e.getMessage());
         }
     }
-
 }
+
+
 
 
 
