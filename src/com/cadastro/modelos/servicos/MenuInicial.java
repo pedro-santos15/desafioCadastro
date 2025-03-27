@@ -108,7 +108,7 @@ public class MenuInicial {
             final String idade;
             if (respostas[6].isEmpty()){
                 idade = "Não informado";
-            } else if (respostas[6].matches("[0-9]") && Double.parseDouble(respostas[6]) <= 20) {
+            } else if (respostas[6].matches("^[0-9]{1,2}$") && Double.parseDouble(respostas[6]) <= 20) {
                 idade = respostas[6];
             } else {
                 throw new IdadeExcecao("Deve se ser informados apenas números e até no maximo 20 anos");
@@ -117,7 +117,7 @@ public class MenuInicial {
             final String peso;
             if (respostas[7].isEmpty()){
                 peso = "Não informado";
-            } else if (respostas[7].matches("[0-9]") &&
+            } else if (respostas[7].matches("^[0-9]{1,2}$") &&
             Double.parseDouble(respostas[7]) <= 60 && Double.parseDouble(respostas[7]) >= 0.5) {
                 peso = respostas[7];
             } else {

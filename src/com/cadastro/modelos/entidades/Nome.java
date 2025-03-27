@@ -11,16 +11,23 @@ public class Nome {
         try {
             if (nomeCompleto.equals("Não informado")){
                 this.nomeCompleto = nomeCompleto;
+                this.nome = "Não informado";
+                this.sobrenome = "Não informado";
             } else if (validacaoNome(nomeCompleto)){
                 this.nomeCompleto = nomeCompleto;
                 String[] separador = nomeCompleto.split(" ");
+
+                if (separador.length < 2){
+                    throw new AusenciaNomeSobrenome("O nome completo deve conter nome e sobrenome.");
+                }
+
                 this.nome = separador[0];
                 this.sobrenome = separador[1];
             }else {
-                throw new AusenciaNomeSobrenome("teste classe nome");
+                throw new AusenciaNomeSobrenome("O nome deve ser composto apenas por letras.");
             }
         } catch (AusenciaNomeSobrenome e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
 
@@ -51,7 +58,7 @@ public class Nome {
     }
 
     public boolean validacaoNome(String nomeCompleto){
-        return nomeCompleto.matches("\\s\\p{L}");
+        return nomeCompleto.matches("^[a-zA-Z]+( [a-zA-Z]+)+$");
     }
 
     @Override
