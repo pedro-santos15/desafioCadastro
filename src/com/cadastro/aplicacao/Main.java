@@ -5,10 +5,10 @@ import com.cadastro.modelos.servicos.ManipulacaoArquivos;
 import com.cadastro.modelos.servicos.MenuInicial;
 
 import java.io.*;
+import java.util.Locale;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-
         ManipulacaoArquivos arquivos = new ManipulacaoArquivos();
 
         // PASSO 1
