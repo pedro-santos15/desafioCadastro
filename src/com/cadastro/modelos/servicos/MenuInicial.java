@@ -1,12 +1,5 @@
 package com.cadastro.modelos.servicos;
-import com.cadastro.excecoes.AusenciaNomeSobrenome;
-import com.cadastro.excecoes.IdadeExcecao;
-import com.cadastro.excecoes.PesoExcecao;
-import com.cadastro.modelos.entidades.Endereco;
-import com.cadastro.modelos.entidades.Nome;
 import com.cadastro.modelos.entidades.Pet;
-import com.cadastro.modelos.enums.Sexo;
-import com.cadastro.modelos.enums.Tipo;
 
 import java.io.*;
 import java.util.Scanner;

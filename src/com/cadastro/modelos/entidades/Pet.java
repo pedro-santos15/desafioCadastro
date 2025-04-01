@@ -21,6 +21,7 @@ public class Pet {
     private String peso;
     private String raca;
 
+    private final String[] respostas = new String[9];
     private static final List<Pet> pets = new ArrayList<>();
 
     public Pet() {
@@ -105,75 +106,24 @@ public class Pet {
             System.out.println("Arquivo não foi encontrado");
         }
         BufferedReader br = new BufferedReader(fr);
-        String s = null;
+        String s;
 
         try {
             Scanner sc = new Scanner(System.in);
-            String[] respostas = new String[9];
 
             for (int i = 0; ((s = br.readLine()) != null); i++) {
                 System.out.println(s);
                 respostas[i] = sc.nextLine();
             }
 
+            validarNome();
+            validarTipo();
+            validarSexo();
+            validarEndereco();
+            validarIdade();
+            validarPeso();
+            validarRaca();
 
-            final Nome nome;
-            if (respostas[0].isEmpty()) {
-                nome = new Nome("Não informado");
-            } else if (respostas[0].contains(" ")) {
-                nome = new Nome(respostas[0]);
-            } else {
-                throw new AusenciaNomeSobrenome("O nome deve possuir somente letras e deve constar Nome e Sobrenome");
-            }
-
-
-            Tipo tipo;
-            if (respostas[1].equalsIgnoreCase("Cachorro")) {
-                tipo = Tipo.CACHORRO;
-            } else {
-                tipo = Tipo.GATO;
-            }
-
-            Sexo sexo;
-            if (respostas[2].equalsIgnoreCase("Macho")) {
-                sexo = Sexo.MACHO;
-            } else {
-                sexo = Sexo.FEMEA;
-            }
-
-
-            final Endereco endereco;
-            if (respostas[4].isEmpty()){
-                endereco = new Endereco(respostas[3], "Não informado", respostas[5]);
-            } else {
-                endereco = new Endereco(respostas[3], respostas[4],respostas[5]);
-            }
-
-            final String idade;
-            if (respostas[6].isEmpty()){
-                idade = "Não informado";
-            } else if (respostas[6].matches("^[0-9]{1,2}(\\.[0-9]{1,2})?$") && Double.parseDouble(respostas[6]) <= 20) {
-                idade = respostas[6];
-            } else {
-                throw new IdadeExcecao("Deve se ser informados apenas números e até no maximo 20 anos");
-            }
-
-            final String peso;
-            if (respostas[7].isEmpty()){
-                peso = "Não informado";
-            } else if (respostas[7].matches("^[0-9]{1,2}(\\.[0-9]{1,2})?$") &&
-                    Double.parseDouble(respostas[7]) <= 60 && Double.parseDouble(respostas[7]) >= 0.5) {
-                peso = respostas[7];
-            } else {
-                throw new PesoExcecao("Deve se ser informados apenas números e no mínimo 0.5 kg e máximo de 60 kg");
-            }
-
-            final String raca;
-            if (respostas[8].isEmpty()){
-                raca = "Não informado";
-            } else {
-                raca = respostas[8];
-            }
             br.close();
             sc.close();
 
@@ -186,16 +136,83 @@ public class Pet {
         }
     }
 
+    public void validarNome(){
+        if (respostas[0].isEmpty()) {
+            this.nome = new Nome("Não informado");
+        } else if (respostas[0].contains(" ")) {
+            this.nome = new Nome(respostas[0]);
+        } else {
+            throw new AusenciaNomeSobrenome("O nome deve possuir somente letras e deve constar Nome e Sobrenome");
+        }
+    }
+
+    public void validarTipo(){
+        if (respostas[1].equalsIgnoreCase("Cachorro")) {
+            this.tipo = Tipo.CACHORRO;
+        } else {
+            this.tipo = Tipo.GATO;
+        }
+    }
+
+    public void validarSexo(){
+        if (respostas[2].equalsIgnoreCase("Macho")) {
+            this.sexo = Sexo.MACHO;
+        } else {
+            this.sexo = Sexo.FEMEA;
+        }
+    }
+
+    public void validarEndereco(){
+        if (respostas[4].isEmpty()){
+            this.endereco = new Endereco(respostas[3], "Não informado", respostas[5]);
+        } else {
+            this.endereco = new Endereco(respostas[3], respostas[4],respostas[5]);
+        }
+    }
+
+    public void validarIdade(){
+        if (respostas[6].isEmpty()){
+            this.idade = "Não informado";
+        } else if (respostas[6].matches("^[0-9]{1,2}(\\.[0-9]{1,2})?$") && Double.parseDouble(respostas[6]) <= 20) {
+            this.idade = respostas[6];
+        } else {
+            throw new IdadeExcecao("Deve se ser informados apenas números e até no maximo 20 anos");
+        }
+    }
+
+    public void validarPeso(){
+        if (respostas[7].isEmpty()){
+            this.peso = "Não informado";
+        } else if (respostas[7].matches("^[0-9]{1,2}(\\.[0-9]{1,2})?$") &&
+                Double.parseDouble(respostas[7]) <= 60 && Double.parseDouble(respostas[7]) >= 0.5) {
+            this.peso = respostas[7];
+        } else {
+            throw new PesoExcecao("Deve se ser informados apenas números e no mínimo 0.5 kg e máximo de 60 kg");
+        }
+    }
+
+    public void validarRaca(){
+        if (respostas[8].isEmpty()){
+            this.raca = "Não informado";
+        } else {
+            this.raca = respostas[8];
+        }
+    }
+
+
     @Override
     public String toString() {
-        return "Pet{" +
-                "nome=" + nome +
-                ", tipo=" + tipo +
-                ", sexo=" + sexo +
-                ", endereco=" + endereco +
-                ", idade=" + idade +
-                ", peso=" + peso +
-                ", raca='" + raca + '\'' +
-                '}';
+        return nome + " - "
+                + tipo
+                + " - "
+                + sexo
+                + " - "
+                + endereco
+                + " - "
+                + idade
+                + " anos - "
+                + peso
+                + "kg - "
+                + raca;
     }
 }
