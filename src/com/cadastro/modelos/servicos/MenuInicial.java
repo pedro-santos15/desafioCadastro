@@ -37,6 +37,8 @@ public class MenuInicial {
             case 4:
                 break;
             case 5:
+                BuscaPet buscaPet = new BuscaPet();
+                buscaPet.buscar();
                 break;
             case 6:
                 break;
