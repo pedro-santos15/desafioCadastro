@@ -117,7 +117,7 @@ public class Pet {
             }
 
             validarNome();
-            validarTipo();
+            validarTipo(respostas[1]);
             validarSexo();
             validarEndereco();
             validarIdade();
@@ -146,8 +146,8 @@ public class Pet {
         }
     }
 
-    public void validarTipo(){
-        if (respostas[1].equalsIgnoreCase("Cachorro")) {
+    public void validarTipo(String s){
+        if (s.equalsIgnoreCase("Cachorro")) {
             this.tipo = Tipo.CACHORRO;
         } else {
             this.tipo = Tipo.GATO;

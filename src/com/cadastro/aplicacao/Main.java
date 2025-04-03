@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         ManipulacaoArquivos arquivos = new ManipulacaoArquivos();
 
-        File file = new File("C:\\Pechak\\MeusProjetos\\desafioCadastro\\formulario.txt");
+        File file = new File("C:\\Users\\pedrohsilva\\Projetos\\desafioCadastro\\formulario.txt");
         //arquivos.leitorArquivo(file);
 
         MenuInicial menu = new MenuInicial();
@@ -24,7 +24,7 @@ public class Main {
         Sexo sexo = Sexo.MACHO;
 
         Pet pet1 = new Pet(new Nome("Pedro Henrique"), tipo, sexo, endereco, "10", "10", "Salsicha");
-        Pet pet2 = new Pet(new Nome("Bananilson Farofa"), tipo, sexo, endereco, "10", "10", "Salsicha");
+        Pet pet2 = new Pet(new Nome("Bananilson Farofa"), tipo, Sexo.FEMEA, endereco, "10", "10", "Salsicha");
         Pet pet3 = new Pet(new Nome("Sasuke Uchiha"), tipo, sexo, endereco, "10", "10", "Salsicha");
 
         menu.exibirMenu();
