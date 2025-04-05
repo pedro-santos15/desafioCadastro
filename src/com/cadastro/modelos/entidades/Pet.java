@@ -6,11 +6,10 @@ import com.cadastro.excecoes.PesoExcecao;
 import com.cadastro.modelos.enums.Sexo;
 import com.cadastro.modelos.enums.Tipo;
 import com.cadastro.modelos.servicos.ManipulacaoArquivos;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Pet {
     private Nome nome;
@@ -50,16 +49,8 @@ public class Pet {
         return tipo;
     }
 
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
-    }
-
     public Sexo getSexo() {
         return sexo;
-    }
-
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
     }
 
     public Endereco getEndereco() {
@@ -116,13 +107,13 @@ public class Pet {
                 respostas[i] = sc.nextLine();
             }
 
-            validarNome();
+            validarNome(respostas[0]);
             validarTipo(respostas[1]);
-            validarSexo();
-            validarEndereco();
-            validarIdade();
-            validarPeso();
-            validarRaca();
+            validarSexo(respostas[2]);
+            validarEndereco(respostas[3], respostas[4], respostas[5]);
+            validarIdade(respostas[6]);
+            validarPeso(respostas[7]);
+            validarRaca(respostas[8]);
 
             br.close();
             sc.close();
@@ -136,17 +127,17 @@ public class Pet {
         }
     }
 
-    public void validarNome(){
-        if (respostas[0].isEmpty()) {
+    public void validarNome(@NotNull String s){
+        if (s.isEmpty()) {
             this.nome = new Nome("Não informado");
-        } else if (respostas[0].contains(" ")) {
-            this.nome = new Nome(respostas[0]);
+        } else if (s.contains(" ")) {
+            this.nome = new Nome(s);
         } else {
             throw new AusenciaNomeSobrenome("O nome deve possuir somente letras e deve constar Nome e Sobrenome");
         }
     }
 
-    public void validarTipo(String s){
+    public void validarTipo(@NotNull String s){
         if (s.equalsIgnoreCase("Cachorro")) {
             this.tipo = Tipo.CACHORRO;
         } else {
@@ -154,51 +145,50 @@ public class Pet {
         }
     }
 
-    public void validarSexo(){
-        if (respostas[2].equalsIgnoreCase("Macho")) {
+    public void validarSexo(String s){
+        if (s.equalsIgnoreCase("Macho")) {
             this.sexo = Sexo.MACHO;
         } else {
             this.sexo = Sexo.FEMEA;
         }
     }
 
-    public void validarEndereco(){
-        if (respostas[4].isEmpty()){
-            this.endereco = new Endereco(respostas[3], "Não informado", respostas[5]);
+    public void validarEndereco(String rua, String numero, String cidade){
+        if (numero.isEmpty()){
+            this.endereco = new Endereco(rua, "Não informado", cidade);
         } else {
-            this.endereco = new Endereco(respostas[3], respostas[4],respostas[5]);
+            this.endereco = new Endereco(rua, numero, cidade);
         }
     }
 
-    public void validarIdade(){
-        if (respostas[6].isEmpty()){
+    public void validarIdade(String s){
+        if (s.isEmpty()){
             this.idade = "Não informado";
-        } else if (respostas[6].matches("^[0-9]{1,2}(\\.[0-9]{1,2})?$") && Double.parseDouble(respostas[6]) <= 20) {
-            this.idade = respostas[6];
+        } else if (s.matches("^[0-9]{1,2}(\\.[0-9]{1,2})?$") && Double.parseDouble(s) <= 20) {
+            this.idade = s;
         } else {
             throw new IdadeExcecao("Deve se ser informados apenas números e até no maximo 20 anos");
         }
     }
 
-    public void validarPeso(){
-        if (respostas[7].isEmpty()){
+    public void validarPeso(String s){
+        if (s.isEmpty()){
             this.peso = "Não informado";
-        } else if (respostas[7].matches("^[0-9]{1,2}(\\.[0-9]{1,2})?$") &&
-                Double.parseDouble(respostas[7]) <= 60 && Double.parseDouble(respostas[7]) >= 0.5) {
-            this.peso = respostas[7];
+        } else if (s.matches("^[0-9]{1,2}(\\.[0-9]{1,2})?$") &&
+                Double.parseDouble(s) <= 60 && Double.parseDouble(s) >= 0.5) {
+            this.peso = s;
         } else {
             throw new PesoExcecao("Deve se ser informados apenas números e no mínimo 0.5 kg e máximo de 60 kg");
         }
     }
 
-    public void validarRaca(){
-        if (respostas[8].isEmpty()){
+    public void validarRaca(String s){
+        if (s.isEmpty()){
             this.raca = "Não informado";
         } else {
-            this.raca = respostas[8];
+            this.raca = s;
         }
     }
-
 
     @Override
     public String toString() {

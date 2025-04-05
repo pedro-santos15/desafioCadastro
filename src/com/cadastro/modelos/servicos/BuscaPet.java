@@ -8,6 +8,11 @@ import java.util.stream.Collectors;
 
 public class BuscaPet {
 
+    private Pet[] resultadoBuscador;
+
+    public Pet[] getResultadoBuscador() {
+        return resultadoBuscador;
+    }
 
     public void buscar(){
         Map<String, String> criterios = new HashMap<>();
@@ -95,16 +100,17 @@ public class BuscaPet {
             filtroFinal = filtroFinal.and(filtroAtual);
         }
 
-
-
         List<Pet> resultadoBusca = Pet.getPets().stream().filter(filtroFinal).collect(Collectors.toList());
 
         if (resultadoBusca.isEmpty()){
             System.out.println("Não foram encontrados resultados com base nos parâmetros");
         }
 
+        int i = 0;
         for (Pet pet : resultadoBusca) {
-            System.out.println(pet);
+            System.out.println((i + 1) + " - " + pet);
+            i++;
+            resultadoBuscador = resultadoBusca.toArray(new Pet[i]);
         }
 
     }
@@ -118,5 +124,4 @@ public class BuscaPet {
         System.out.println("Endereço");
         System.out.println("Qual critério você gostaria de utilizar?");
     }
-
 }

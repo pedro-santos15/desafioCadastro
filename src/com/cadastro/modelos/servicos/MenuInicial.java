@@ -25,19 +25,22 @@ public class MenuInicial {
     }
 
     public void escolhaMenu(File file) {
+        BuscaPet buscaPet = new BuscaPet();
+
         switch (getEscolha()) {
             case 1:
                 Pet pet = new Pet();
                 pet.cadastroPet(file);
                 break;
             case 2:
+                AlterarDadosPet alterar = new AlterarDadosPet();
+                alterar.alterarDados();
                 break;
             case 3:
                 break;
             case 4:
                 break;
             case 5:
-                BuscaPet buscaPet = new BuscaPet();
                 buscaPet.buscar();
                 break;
             case 6:
