@@ -14,6 +14,9 @@ public class AlterarDadosPet {
 
         buscaPet.buscar();
 
+        //possivelmente vou usar um do-while para aparecer o menu de buscas até o usuário
+        //buscar corretamente.
+
         System.out.println("Qual pet você deseja editar?");
         int selecao = sc.nextInt();
         sc.nextLine();

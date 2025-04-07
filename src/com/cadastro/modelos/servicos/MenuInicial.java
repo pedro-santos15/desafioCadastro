@@ -37,6 +37,8 @@ public class MenuInicial {
                 alterar.alterarDados();
                 break;
             case 3:
+                DeletarPet deletar = new DeletarPet();
+                deletar.deletar();
                 break;
             case 4:
                 break;

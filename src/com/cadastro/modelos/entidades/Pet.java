@@ -205,4 +205,12 @@ public class Pet {
                 + "kg - "
                 + raca;
     }
+
+    public static void exibirPets(){
+        int i = 1;
+        for (Pet pet : Pet.getPets()) {
+            System.out.println(i + " - " + pet);
+            i++;
+        }
+    }
 }
