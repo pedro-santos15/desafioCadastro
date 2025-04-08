@@ -2,7 +2,6 @@ package com.cadastro.modelos.servicos;
 
 import com.cadastro.modelos.entidades.Pet;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 public class DeletarPet {
@@ -56,8 +55,6 @@ public class DeletarPet {
 
             }
         }
-
-
 
         System.out.println("Lista atualizada de pets: ");
         Pet.exibirPets();

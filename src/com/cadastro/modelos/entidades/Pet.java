@@ -5,10 +5,8 @@ import com.cadastro.excecoes.IdadeExcecao;
 import com.cadastro.excecoes.PesoExcecao;
 import com.cadastro.modelos.enums.Sexo;
 import com.cadastro.modelos.enums.Tipo;
-import com.cadastro.modelos.servicos.ManipulacaoArquivos;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.*;
 import java.util.*;
 
 public class Pet {
@@ -20,7 +18,7 @@ public class Pet {
     private String peso;
     private String raca;
 
-    private final String[] respostas = new String[9];
+
     private static final List<Pet> pets = new ArrayList<>();
 
     public Pet() {
@@ -87,44 +85,6 @@ public class Pet {
 
     public static List<Pet> getPets() {
         return pets;
-    }
-
-    public void cadastroPet(File file) {
-        FileReader fr = null;
-        try {
-            fr = new FileReader(file);
-        } catch (FileNotFoundException e) {
-            System.out.println("Arquivo não foi encontrado");
-        }
-        BufferedReader br = new BufferedReader(fr);
-        String s;
-
-        try {
-            Scanner sc = new Scanner(System.in);
-
-            for (int i = 0; ((s = br.readLine()) != null); i++) {
-                System.out.println(s);
-                respostas[i] = sc.nextLine();
-            }
-
-            validarNome(respostas[0]);
-            validarTipo(respostas[1]);
-            validarSexo(respostas[2]);
-            validarEndereco(respostas[3], respostas[4], respostas[5]);
-            validarIdade(respostas[6]);
-            validarPeso(respostas[7]);
-            validarRaca(respostas[8]);
-
-            br.close();
-            sc.close();
-
-            Pet pet = new Pet(nome, tipo, sexo, endereco, idade, peso, raca);
-
-            ManipulacaoArquivos arquivos = new ManipulacaoArquivos();
-            arquivos.escritorArquivos(pet);
-        } catch (IOException | AusenciaNomeSobrenome | IdadeExcecao | PesoExcecao e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     public void validarNome(@NotNull String s){

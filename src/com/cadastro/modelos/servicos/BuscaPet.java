@@ -100,7 +100,7 @@ public class BuscaPet {
             filtroFinal = filtroFinal.and(filtroAtual);
         }
 
-        List<Pet> resultadoBusca = Pet.getPets().stream().filter(filtroFinal).collect(Collectors.toList());
+        List<Pet> resultadoBusca = Pet.getPets().stream().filter(filtroFinal).toList();
 
         if (resultadoBusca.isEmpty()){
             System.out.println("Não foram encontrados resultados com base nos parâmetros");
